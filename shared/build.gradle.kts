@@ -84,6 +84,14 @@ kotlin {
     }
 }
 
+// Configure androidHostTest dependencies
+val androidHostTestSourceSet = kotlin.sourceSets.findByName("androidHostTest")
+if (androidHostTestSourceSet != null) {
+    androidHostTestSourceSet.dependencies {
+        implementation(libs.sqldelight.sqlite.driver)
+    }
+}
+
 dependencies {
     androidRuntimeClasspath(libs.compose.uiTooling)
 }

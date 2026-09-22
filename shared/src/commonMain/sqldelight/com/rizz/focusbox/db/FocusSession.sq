@@ -1,15 +1,20 @@
 CREATE TABLE FocusSession (
     id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    taskName TEXT,
+    type TEXT NOT NULL,
+    plannedDurationSec INTEGER NOT NULL,
+    actualDurationSec INTEGER NOT NULL,
     startedAt INTEGER NOT NULL,
-    durationMinutes INTEGER NOT NULL
+    endedAt INTEGER,
+    completed INTEGER NOT NULL
 );
 
 selectAll:
 SELECT * FROM FocusSession ORDER BY startedAt DESC;
 
 insertSession:
-INSERT INTO FocusSession(startedAt, durationMinutes)
-VALUES (?, ?);
+INSERT INTO FocusSession(taskName, type, plannedDurationSec, actualDurationSec, startedAt, endedAt, completed)
+VALUES (?, ?, ?, ?, ?, ?, ?);
 
 deleteAll:
 DELETE FROM FocusSession;
