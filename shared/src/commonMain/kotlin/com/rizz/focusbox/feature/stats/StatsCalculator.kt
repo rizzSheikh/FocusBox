@@ -62,4 +62,27 @@ object StatsCalculator {
             recentSessions = recentSessions
         )
     }
+
+    fun groupedHistory(
+        sessions: List<FocusSession>,
+        filter: HistoryFilter,
+        zone: TimeZone = TimeZone.currentSystemDefault()
+    ): List<HistoryGroup> {
+        val filtered = when (filter) {
+            HistoryFilter.ALL -> sessions
+            HistoryFilter.FOCUS -> sessions.filter { it.type == FOCUS }
+            HistoryFilter.BREAKS -> sessions.filter { it.type == "SHORT_BREAK" || it.type == "LONG_BREAK" }
+        }
+
+        return filtered
+            .groupBy { it.localDate(zone) }
+            .map { (date, entries) ->
+                val sortedEntries = entries.sortedByDescending { it.startedAt }
+                val totalFocusSec = sortedEntries
+                    .filter { it.type == FOCUS && it.completed == COMPLETED }
+                    .sumOf { it.actualDurationSec }
+                HistoryGroup(date, totalFocusSec, sortedEntries)
+            }
+            .sortedByDescending { it.date }
+    }
 }

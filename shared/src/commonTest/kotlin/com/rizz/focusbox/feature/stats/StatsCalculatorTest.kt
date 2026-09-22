@@ -143,4 +143,60 @@ class StatsCalculatorTest {
         assertEquals(5, stats.recentSessions.size)
         assertEquals("Task 6", stats.recentSessions.first().taskName)
     }
+
+    @Test
+    fun groupedHistory_groups_by_local_day_and_sums_completed_focus_per_group() {
+        val sessions = listOf(
+            session("Write report", "FOCUS", today, hour = 10, actualDurationSec = 1500),
+            session(null, "SHORT_BREAK", today, hour = 11, actualDurationSec = 300),
+            session("Read book", "FOCUS", today.minus(1, DateTimeUnit.DAY), hour = 9, actualDurationSec = 1500)
+        )
+
+        val groups = StatsCalculator.groupedHistory(sessions, HistoryFilter.ALL, zone)
+
+        assertEquals(2, groups.size)
+        assertEquals(today, groups[0].date)
+        assertEquals(1500L, groups[0].totalFocusSec)
+        assertEquals(2, groups[0].sessions.size)
+    }
+
+    @Test
+    fun groupedHistory_shows_actual_not_planned_duration_for_skipped_sessions() {
+        val sessions = listOf(
+            session("Write API docs", "FOCUS", today, plannedDurationSec = 1500, actualDurationSec = 720, completed = 0L)
+        )
+
+        val groups = StatsCalculator.groupedHistory(sessions, HistoryFilter.ALL, zone)
+
+        val skipped = groups.single().sessions.single()
+        assertEquals(720L, skipped.actualDurationSec)
+        assertEquals(1500L, skipped.plannedDurationSec)
+        assertEquals(0L, skipped.completed)
+    }
+
+    @Test
+    fun groupedHistory_focus_filter_excludes_breaks() {
+        val sessions = listOf(
+            session("Write report", "FOCUS", today),
+            session(null, "SHORT_BREAK", today)
+        )
+
+        val groups = StatsCalculator.groupedHistory(sessions, HistoryFilter.FOCUS, zone)
+
+        assertEquals(1, groups.single().sessions.size)
+        assertEquals("FOCUS", groups.single().sessions.single().type)
+    }
+
+    @Test
+    fun groupedHistory_breaks_filter_includes_both_short_and_long() {
+        val sessions = listOf(
+            session(null, "SHORT_BREAK", today),
+            session(null, "LONG_BREAK", today),
+            session("Write report", "FOCUS", today)
+        )
+
+        val groups = StatsCalculator.groupedHistory(sessions, HistoryFilter.BREAKS, zone)
+
+        assertEquals(2, groups.single().sessions.size)
+    }
 }
