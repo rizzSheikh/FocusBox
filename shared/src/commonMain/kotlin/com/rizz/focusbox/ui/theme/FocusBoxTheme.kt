@@ -31,6 +31,7 @@ fun FocusBoxTheme(
     CompositionLocalProvider(LocalFocusBoxExtraColors provides extraColors) {
         MaterialTheme(
             colorScheme = colorScheme,
+            typography = focusBoxTypography(),
             content = content,
         )
     }
