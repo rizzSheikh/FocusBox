@@ -45,7 +45,7 @@ object StatsCalculator {
 
         val windowStart = today.minus(6, DateTimeUnit.DAY)
         val focusByTask = completedFocus
-            .filter { it.taskName != null && it.localDate(zone) >= windowStart }
+            .filter { it.taskName != null && it.localDate(zone) >= windowStart && it.localDate(zone) <= today }
             .groupBy { it.taskName!! }
             .map { (taskName, entries) -> TaskTotal(taskName, entries.sumOf { it.actualDurationSec }) }
             .sortedByDescending { it.totalFocusSec }

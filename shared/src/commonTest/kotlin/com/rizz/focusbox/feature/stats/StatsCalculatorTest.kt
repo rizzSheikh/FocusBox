@@ -122,6 +122,19 @@ class StatsCalculatorTest {
     }
 
     @Test
+    fun dashboardStats_focus_by_task_excludes_sessions_after_today() {
+        val sessions = listOf(
+            session("Write report", "FOCUS", today, actualDurationSec = 1200),
+            session("Future task", "FOCUS", today.plus(1, DateTimeUnit.DAY), actualDurationSec = 9999)
+        )
+
+        val stats = StatsCalculator.dashboardStats(sessions, today, zone)
+
+        assertEquals(1, stats.focusByTask.size)
+        assertEquals("Write report", stats.focusByTask[0].taskName)
+    }
+
+    @Test
     fun dashboardStats_recent_sessions_returns_five_most_recent_newest_first() {
         val sessions = (0..6).map { i -> session("Task $i", "FOCUS", today, hour = i) }
 
