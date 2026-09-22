@@ -51,6 +51,28 @@ class TimerEngine(private val repository: SessionRepository) {
         }
     }
 
+    fun skip() {
+        val current = _state.value
+        val (session, remaining) = when (current) {
+            is TimerState.Running -> current.session to current.remainingSec
+            is TimerState.Paused -> current.session to current.remainingSec
+            else -> error("skip() only valid from Running or Paused, was $current")
+        }
+        val actual = session.totalSec - remaining
+        persistSession(session, actualDurationSec = actual, completed = false)
+        _state.value = TimerState.Idle
+    }
+
+    fun startBreak(config: TimerConfig = TimerConfig.DEFAULT) {
+        val current = _state.value
+        check(current is TimerState.Complete) { "startBreak() only valid from Complete, was $current" }
+        val isLong = completedFocusCount % config.longBreakInterval == 0
+        val type = if (isLong) SessionType.LONG_BREAK else SessionType.SHORT_BREAK
+        val totalSec = if (isLong) config.longBreakSec else config.shortBreakSec
+        val session = ActiveSession(type, current.session.taskName, totalSec, currentTimeMillis())
+        _state.value = TimerState.Running(session, totalSec)
+    }
+
     private fun persistSession(session: ActiveSession, actualDurationSec: Int, completed: Boolean) {
         repository.insertSession(
             FocusSessionRecord(
