@@ -28,7 +28,7 @@ Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
 
 ### Design
 
-Figma: [Focus Box - Android App](https://www.figma.com/design/CgY4eGabUksd9QliAQI1xX/Focus-Box--Android-App) — the "Components" page (`node-id=16-290`) is the source of truth for colors, typography, and the shared component set; "Screens - Light & Dark" holds the full app flows.
+Figma: [Focus Box - Android App](https://www.figma.com/community/file/1684303802987760141) — the "Components" page (`node-id=16-290`) is the source of truth for colors, typography, and the shared component set; "Screens - Light & Dark" holds the full app flows.
 
 Miro: [High-level architecture board](https://miro.com/app/board/uXjVHjlqnOY=/?share_link_id=154476372700) — screen flow across the 5 app sections, component architecture (packages, `TimerEngine`, services), and the SQLDelight data model.
 
