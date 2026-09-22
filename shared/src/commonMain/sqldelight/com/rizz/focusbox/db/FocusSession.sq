@@ -1,0 +1,15 @@
+CREATE TABLE FocusSession (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    startedAt INTEGER NOT NULL,
+    durationMinutes INTEGER NOT NULL
+);
+
+selectAll:
+SELECT * FROM FocusSession ORDER BY startedAt DESC;
+
+insertSession:
+INSERT INTO FocusSession(startedAt, durationMinutes)
+VALUES (?, ?);
+
+deleteAll:
+DELETE FROM FocusSession;
