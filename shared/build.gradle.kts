@@ -67,6 +67,10 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             api(libs.koin.core)
             implementation(libs.koin.annotations)
+            implementation(libs.koin.compose)
+            implementation(libs.multiplatform.settings)
+            implementation(libs.multiplatform.settings.coroutines)
+            implementation(libs.multiplatform.settings.no.arg)
             implementation(libs.sqldelight.runtime)
             implementation(libs.sqldelight.coroutines.extensions)
         }
@@ -75,6 +79,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.multiplatform.settings)
         }
     }
 }
