@@ -53,6 +53,29 @@ class StatsCalculatorTest {
     }
 
     @Test
+    fun dashboardStats_last7Days_is_ordered_oldest_to_newest_with_correct_buckets_and_average() {
+        val sessions = listOf(
+            session("Write report", "FOCUS", today, actualDurationSec = 1200),
+            session("Write report", "FOCUS", today.minus(3, DateTimeUnit.DAY), actualDurationSec = 600),
+            session("Write report", "FOCUS", today.minus(6, DateTimeUnit.DAY), actualDurationSec = 300)
+        )
+
+        val stats = StatsCalculator.dashboardStats(sessions, today, zone)
+
+        assertEquals(7, stats.last7Days.size)
+        assertEquals(today.minus(6, DateTimeUnit.DAY), stats.last7Days[0].date)
+        assertEquals(today, stats.last7Days[6].date)
+
+        assertEquals(1200L, stats.last7Days[6].totalFocusSec)
+        assertEquals(600L, stats.last7Days[3].totalFocusSec)
+        assertEquals(300L, stats.last7Days[0].totalFocusSec)
+        assertEquals(0L, stats.last7Days[1].totalFocusSec)
+
+        // (1200 + 600 + 300) / 7 = 2100 / 7 = 300 (integer division)
+        assertEquals(300L, stats.dailyAverageSec)
+    }
+
+    @Test
     fun dashboardStats_counts_todays_completed_focus_sessions() {
         val sessions = listOf(
             session("Write report", "FOCUS", today, hour = 9),
