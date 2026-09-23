@@ -2,6 +2,8 @@ package com.rizz.focusbox
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -19,6 +21,11 @@ fun App() {
     val themeRepository: ThemeRepository = koinInject()
     val themeMode by themeRepository.themeMode.collectAsStateWithLifecycle()
     FocusBoxTheme(darkTheme = resolveDarkTheme(themeMode)) {
-        FocusBoxNavGraph(modifier = Modifier.safeContentPadding().fillMaxSize())
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background,
+        ) {
+            FocusBoxNavGraph(modifier = Modifier.safeContentPadding().fillMaxSize())
+        }
     }
 }
