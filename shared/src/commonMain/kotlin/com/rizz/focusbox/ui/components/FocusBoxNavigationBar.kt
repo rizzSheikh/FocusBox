@@ -5,8 +5,8 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
+import com.rizz.focusbox.ui.theme.PreviewLightDark
 
 enum class FocusBoxDestination(val label: String) {
     Timer("Timer"),
@@ -14,11 +14,6 @@ enum class FocusBoxDestination(val label: String) {
     Settings("Settings"),
 }
 
-/**
- * Fixed to the app's 3 destinations, matching the Figma "Navigation bar" component - not a
- * generic N-item nav bar. Labels only (no icon set is bundled yet in this pass); the label
- * style matches the Figma "Label small - 12/Medium" token already wired into FocusBoxTypography.
- */
 @Composable
 fun FocusBoxNavigationBar(
     selected: FocusBoxDestination,
@@ -37,18 +32,10 @@ fun FocusBoxNavigationBar(
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
-private fun FocusBoxNavigationBarLightPreview() {
-    FocusBoxTheme(darkTheme = false) {
-        FocusBoxNavigationBar(selected = FocusBoxDestination.Timer, onSelect = {})
-    }
-}
-
-@Preview
-@Composable
-private fun FocusBoxNavigationBarDarkPreview() {
-    FocusBoxTheme(darkTheme = true) {
+private fun FocusBoxNavigationBarPreview() {
+    FocusBoxTheme {
         FocusBoxNavigationBar(selected = FocusBoxDestination.Timer, onSelect = {})
     }
 }

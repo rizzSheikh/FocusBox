@@ -9,11 +9,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
+import com.rizz.focusbox.ui.theme.PreviewLightDark
 
-/** A generic settings list row: label (+ optional subtitle) on the left, a trailing control on the right. */
 @Composable
 fun SettingsRow(
     title: String,
@@ -35,27 +34,22 @@ fun SettingsRow(
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
-private fun SettingsRowLightPreview() {
-    FocusBoxTheme(darkTheme = false) {
-        SettingsRow(
-            title = "Notifications",
-            subtitle = "Show a notification while focusing",
-            modifier = Modifier.padding(16.dp),
-            trailing = { FocusBoxSwitch(checked = true, onCheckedChange = {}) },
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun SettingsRowDarkPreview() {
-    FocusBoxTheme(darkTheme = true) {
-        SettingsRow(
-            title = "Theme",
-            subtitle = "System",
-            modifier = Modifier.padding(16.dp),
-        )
+private fun SettingsRowPreview() {
+    FocusBoxTheme {
+        Column {
+            SettingsRow(
+                title = "Notifications",
+                subtitle = "Show a notification while focusing",
+                modifier = Modifier.padding(16.dp),
+                trailing = { FocusBoxSwitch(checked = true, onCheckedChange = {}) },
+            )
+            SettingsRow(
+                title = "Theme",
+                subtitle = "System",
+                modifier = Modifier.padding(16.dp),
+            )
+        }
     }
 }

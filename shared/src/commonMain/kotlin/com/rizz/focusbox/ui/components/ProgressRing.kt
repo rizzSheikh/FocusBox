@@ -12,17 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
+import com.rizz.focusbox.ui.theme.PreviewLightDark
 import com.rizz.focusbox.ui.theme.focusBoxDisplayTimerStyle
 
-/**
- * The Figma "Progress ring" component defines a Theme x Mode (Idle/Focus/Paused/Short break/...)
- * variant set. Rather than bake every mode into this composable, it takes the state color as a
- * plain parameter - the caller (a future TimerViewModel) maps TimerEngine's SessionType/TimerState
- * to a color from FocusBoxTheme, matching this session's domain-first, UI-wiring-later pattern.
- */
 @Composable
 fun ProgressRing(
     progress: Float,
@@ -54,23 +48,10 @@ fun ProgressRing(
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
-private fun ProgressRingLightPreview() {
-    FocusBoxTheme(darkTheme = false) {
-        ProgressRing(
-            progress = 0.65f,
-            timeText = "14:59",
-            ringColor = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(16.dp),
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun ProgressRingDarkPreview() {
-    FocusBoxTheme(darkTheme = true) {
+private fun ProgressRingPreview() {
+    FocusBoxTheme {
         ProgressRing(
             progress = 0.65f,
             timeText = "14:59",

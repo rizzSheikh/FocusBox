@@ -5,9 +5,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
+import com.rizz.focusbox.ui.theme.PreviewLightDark
 
 @Composable
 fun FocusBoxButton(
@@ -21,18 +21,10 @@ fun FocusBoxButton(
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
-private fun FocusBoxButtonLightPreview() {
-    FocusBoxTheme(darkTheme = false) {
-        FocusBoxButton(text = "Start focus", onClick = {}, modifier = Modifier.padding(16.dp))
-    }
-}
-
-@Preview
-@Composable
-private fun FocusBoxButtonDarkPreview() {
-    FocusBoxTheme(darkTheme = true) {
+private fun FocusBoxButtonPreview() {
+    FocusBoxTheme {
         FocusBoxButton(text = "Start focus", onClick = {}, modifier = Modifier.padding(16.dp))
     }
 }

@@ -6,15 +6,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.koinCompiler)
-    alias(libs.plugins.sqldelight)
-}
-
-sqldelight {
-    databases {
-        create("FocusBoxDatabase") {
-            packageName.set("com.rizz.focusbox.db")
-        }
-    }
+    alias(libs.plugins.kotlinSerialization)
 }
 
 kotlin {
@@ -25,6 +17,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = true
+            export(project(":data"))
         }
     }
     
@@ -54,9 +47,10 @@ kotlin {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.compose.uiTooling)
             implementation(libs.koin.android)
-            implementation(libs.sqldelight.android.driver)
+            implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+            api(project(":data"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
@@ -68,28 +62,15 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.annotations)
             implementation(libs.koin.compose)
-            implementation(libs.multiplatform.settings)
-            implementation(libs.multiplatform.settings.coroutines)
-            implementation(libs.multiplatform.settings.no.arg)
+            implementation(libs.koin.compose.viewmodel)
+            implementation(libs.koin.core.viewmodel)
             implementation(libs.kotlinx.datetime)
-            implementation(libs.sqldelight.runtime)
-            implementation(libs.sqldelight.coroutines.extensions)
-        }
-        iosMain.dependencies {
-            implementation(libs.sqldelight.native.driver)
+            implementation(libs.navigation.compose)
+            implementation(libs.kotlinx.serialization.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-            implementation(libs.multiplatform.settings)
         }
-    }
-}
-
-// Configure androidHostTest dependencies
-val androidHostTestSourceSet = kotlin.sourceSets.findByName("androidHostTest")
-if (androidHostTestSourceSet != null) {
-    androidHostTestSourceSet.dependencies {
-        implementation(libs.sqldelight.sqlite.driver)
     }
 }
 

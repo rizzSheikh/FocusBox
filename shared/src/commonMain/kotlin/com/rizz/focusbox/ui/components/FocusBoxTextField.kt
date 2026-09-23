@@ -6,9 +6,9 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
+import com.rizz.focusbox.ui.theme.PreviewLightDark
 
 @Composable
 fun FocusBoxTextField(
@@ -26,23 +26,10 @@ fun FocusBoxTextField(
     )
 }
 
-@Preview
+@PreviewLightDark
 @Composable
-private fun FocusBoxTextFieldLightPreview() {
-    FocusBoxTheme(darkTheme = false) {
-        FocusBoxTextField(
-            value = "Write report",
-            onValueChange = {},
-            label = "Task",
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun FocusBoxTextFieldDarkPreview() {
-    FocusBoxTheme(darkTheme = true) {
+private fun FocusBoxTextFieldPreview() {
+    FocusBoxTheme {
         FocusBoxTextField(
             value = "Write report",
             onValueChange = {},

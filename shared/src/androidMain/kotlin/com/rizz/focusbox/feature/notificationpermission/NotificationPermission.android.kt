@@ -1,0 +1,18 @@
+package com.rizz.focusbox.feature.notificationpermission
+
+import android.Manifest
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.Composable
+
+@Composable
+actual fun rememberNotificationPermissionRequester(onResult: (granted: Boolean) -> Unit): () -> Unit {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+        return { onResult(true) }
+    }
+    val launcher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { granted -> onResult(granted) }
+    return { launcher.launch(Manifest.permission.POST_NOTIFICATIONS) }
+}

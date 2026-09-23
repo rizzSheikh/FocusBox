@@ -5,9 +5,9 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
+import com.rizz.focusbox.ui.theme.PreviewLightDark
 
 @Composable
 fun FocusBoxChip(
@@ -24,18 +24,10 @@ fun FocusBoxChip(
     )
 }
 
-@Preview
+@PreviewLightDark
 @Composable
-private fun FocusBoxChipLightPreview() {
-    FocusBoxTheme(darkTheme = false) {
-        FocusBoxChip(text = "Focus", selected = true, onClick = {}, modifier = Modifier.padding(16.dp))
-    }
-}
-
-@Preview
-@Composable
-private fun FocusBoxChipDarkPreview() {
-    FocusBoxTheme(darkTheme = true) {
+private fun FocusBoxChipPreview() {
+    FocusBoxTheme {
         FocusBoxChip(text = "Focus", selected = true, onClick = {}, modifier = Modifier.padding(16.dp))
     }
 }

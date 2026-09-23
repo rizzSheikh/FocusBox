@@ -1,5 +1,7 @@
 package com.rizz.focusbox.feature.timer
 
+import com.rizz.focusbox.data.timer.FocusSessionRecord
+import com.rizz.focusbox.data.timer.SessionRepository
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith

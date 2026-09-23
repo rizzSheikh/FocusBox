@@ -6,9 +6,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
+import com.rizz.focusbox.ui.theme.PreviewLightDark
 
 @Composable
 fun FocusBoxSnackbar(
@@ -27,22 +27,10 @@ fun FocusBoxSnackbar(
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
-private fun FocusBoxSnackbarLightPreview() {
-    FocusBoxTheme(darkTheme = false) {
-        FocusBoxSnackbar(
-            message = "Session skipped",
-            actionLabel = "Undo",
-            modifier = Modifier.padding(16.dp),
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun FocusBoxSnackbarDarkPreview() {
-    FocusBoxTheme(darkTheme = true) {
+private fun FocusBoxSnackbarPreview() {
+    FocusBoxTheme {
         FocusBoxSnackbar(
             message = "Session skipped",
             actionLabel = "Undo",

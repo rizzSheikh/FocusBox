@@ -12,11 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
+import com.rizz.focusbox.ui.theme.PreviewLightDark
 
-/** Used to adjust integer settings like focus/break duration in minutes. */
 @Composable
 fun FocusBoxStepper(
     value: Int,
@@ -60,18 +59,10 @@ private fun StepperButton(symbol: String, enabled: Boolean, onClick: () -> Unit)
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
-private fun FocusBoxStepperLightPreview() {
-    FocusBoxTheme(darkTheme = false) {
-        FocusBoxStepper(value = 25, onValueChange = {}, modifier = Modifier.padding(16.dp))
-    }
-}
-
-@Preview
-@Composable
-private fun FocusBoxStepperDarkPreview() {
-    FocusBoxTheme(darkTheme = true) {
+private fun FocusBoxStepperPreview() {
+    FocusBoxTheme {
         FocusBoxStepper(value = 25, onValueChange = {}, modifier = Modifier.padding(16.dp))
     }
 }

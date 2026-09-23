@@ -13,16 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
+import com.rizz.focusbox.ui.theme.PreviewLightDark
 
-/**
- * One row of the Session history list. A completed focus session shows a checkmark glyph; a
- * break or a skipped session shows a plain colored dot (skipped uses a muted/gray indicatorColor,
- * matching the Figma history screen where a skipped entry shows its actual elapsed duration,
- * not the planned one - callers read that straight off TimerEngine's FocusSessionRecord).
- */
 @Composable
 fun SessionItem(
     title: String,
@@ -58,32 +52,27 @@ private fun StatusIndicator(color: Color, showCheck: Boolean) {
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
-private fun SessionItemLightPreview() {
-    FocusBoxTheme(darkTheme = false) {
-        SessionItem(
-            title = "Design onboarding flow",
-            subtitle = "Focus · 10:05 AM",
-            duration = "25 min",
-            indicatorColor = MaterialTheme.colorScheme.primary,
-            completed = true,
-            modifier = Modifier.padding(16.dp),
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun SessionItemDarkPreview() {
-    FocusBoxTheme(darkTheme = true) {
-        SessionItem(
-            title = "Write API docs",
-            subtitle = "Skipped · 9:10 AM",
-            duration = "12 min",
-            indicatorColor = MaterialTheme.colorScheme.outline,
-            completed = false,
-            modifier = Modifier.padding(16.dp),
-        )
+private fun SessionItemPreview() {
+    FocusBoxTheme {
+        Column {
+            SessionItem(
+                title = "Design onboarding flow",
+                subtitle = "Focus · 10:05 AM",
+                duration = "25 min",
+                indicatorColor = MaterialTheme.colorScheme.primary,
+                completed = true,
+                modifier = Modifier.padding(16.dp),
+            )
+            SessionItem(
+                title = "Write API docs",
+                subtitle = "Skipped · 9:10 AM",
+                duration = "12 min",
+                indicatorColor = MaterialTheme.colorScheme.outline,
+                completed = false,
+                modifier = Modifier.padding(16.dp),
+            )
+        }
     }
 }

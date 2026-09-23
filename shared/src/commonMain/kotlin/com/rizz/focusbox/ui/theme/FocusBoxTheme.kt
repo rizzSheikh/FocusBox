@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import com.rizz.focusbox.data.theme.ThemeMode
 
 val LocalFocusBoxExtraColors = staticCompositionLocalOf {
     FocusBoxExtraColors(
