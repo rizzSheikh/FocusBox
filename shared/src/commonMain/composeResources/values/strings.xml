@@ -16,6 +16,4 @@
     <string name="notification_rationale_subtitle">Allow notifications so focusBox can tell you when it\'s time for a break — even after the app is closed.</string>
     <string name="notification_rationale_allow">Allow notifications</string>
     <string name="notification_rationale_not_now">Not now</string>
-
-    <string name="home_placeholder">Home — Timer coming soon</string>
 </resources>
