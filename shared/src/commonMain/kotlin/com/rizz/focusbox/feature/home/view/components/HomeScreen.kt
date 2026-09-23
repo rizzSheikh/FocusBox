@@ -8,8 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.rizz.focusbox.ui.test.UiTestTags
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
 import com.rizz.focusbox.ui.theme.PreviewLightDark
 import focusbox.shared.generated.resources.Res
@@ -24,6 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 fun HomeScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
+            .testTag(UiTestTags.HOME_SCREEN)
             .fillMaxSize()
             .padding(32.dp),
         contentAlignment = Alignment.Center,

@@ -20,8 +20,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.rizz.focusbox.feature.onboarding.view.event.OnBoardingScreenEvents
+import com.rizz.focusbox.ui.test.UiTestTags
 import com.rizz.focusbox.ui.components.FocusBoxButton
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
 import com.rizz.focusbox.ui.theme.PreviewLightDark
@@ -118,7 +120,10 @@ fun OnboardingPagerScreen(
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 16.dp),
+                modifier = Modifier
+                    .testTag(UiTestTags.ONBOARDING_PRIMARY)
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp, vertical = 16.dp),
             )
         }
 
@@ -127,7 +132,10 @@ fun OnboardingPagerScreen(
                 onClick = {
                     onEvent(OnBoardingScreenEvents.OnSkipClick)
                 },
-                modifier = Modifier.align(Alignment.TopEnd).padding(top = 8.dp, end = 8.dp),
+                modifier = Modifier
+                    .testTag(UiTestTags.ONBOARDING_SKIP)
+                    .align(Alignment.TopEnd)
+                    .padding(top = 8.dp, end = 8.dp),
             ) {
                 Text(stringResource(Res.string.onboarding_action_skip))
             }

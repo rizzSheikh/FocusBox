@@ -11,9 +11,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rizz.focusbox.ui.components.FocusBoxButton
+import com.rizz.focusbox.ui.test.UiTestTags
 import com.rizz.focusbox.ui.components.OnboardingIllustration
 import com.rizz.focusbox.ui.theme.FocusBoxTheme
 import com.rizz.focusbox.ui.theme.PreviewLightDark
@@ -62,7 +64,12 @@ fun NotificationRationaleScreen(
             onClick = onEnableNotifications,
             modifier = Modifier.fillMaxWidth().padding(top = 32.dp),
         )
-        TextButton(onClick = onNotNow, modifier = Modifier.padding(top = 8.dp)) {
+        TextButton(
+            onClick = onNotNow,
+            modifier = Modifier
+                .testTag(UiTestTags.NOTIFICATION_NOT_NOW)
+                .padding(top = 8.dp),
+        ) {
             Text(stringResource(Res.string.notification_rationale_not_now))
         }
     }
