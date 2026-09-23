@@ -1,6 +1,7 @@
 package com.rizz.focusbox.data.stats
 
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
+import com.rizz.focusbox.data.dao.FocusSessionDao
 import com.rizz.focusbox.db.FocusBoxDatabase
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.async
@@ -23,7 +24,7 @@ class SqlDelightStatsRepositoryTest {
     @Test
     fun observeSessions_emits_inserted_rows() = runBlocking {
         val db = newDatabase()
-        val repository = SqlDelightStatsRepository(db)
+        val repository = SqlDelightStatsRepository(FocusSessionDao(db))
 
         db.focusSessionQueries.insertSession(
             taskName = "Write report",
@@ -45,7 +46,7 @@ class SqlDelightStatsRepositoryTest {
     @Test
     fun observeSessions_on_empty_table_emits_empty_list() = runBlocking {
         val db = newDatabase()
-        val repository = SqlDelightStatsRepository(db)
+        val repository = SqlDelightStatsRepository(FocusSessionDao(db))
 
         val sessions = repository.observeSessions().first()
 
@@ -55,7 +56,7 @@ class SqlDelightStatsRepositoryTest {
     @Test
     fun observeSessions_emits_a_new_value_when_a_row_is_inserted_after_collection_starts() = runBlocking {
         val db = newDatabase()
-        val repository = SqlDelightStatsRepository(db)
+        val repository = SqlDelightStatsRepository(FocusSessionDao(db))
 
         db.focusSessionQueries.insertSession(
             taskName = "Write report",

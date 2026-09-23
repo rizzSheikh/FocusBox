@@ -1,6 +1,7 @@
 package com.rizz.focusbox.data.timer
 
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
+import com.rizz.focusbox.data.dao.FocusSessionDao
 import com.rizz.focusbox.db.FocusBoxDatabase
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +18,7 @@ class SqlDelightSessionRepositoryTest {
     @Test
     fun insertSession_persists_a_completed_focus_session() {
         val db = newDatabase()
-        val repository = SqlDelightSessionRepository(db)
+        val repository = SqlDelightSessionRepository(FocusSessionDao(db))
 
         repository.insertSession(
             FocusSessionRecord(
@@ -45,7 +46,7 @@ class SqlDelightSessionRepositoryTest {
     @Test
     fun insertSession_persists_a_skipped_session_with_null_task_name() {
         val db = newDatabase()
-        val repository = SqlDelightSessionRepository(db)
+        val repository = SqlDelightSessionRepository(FocusSessionDao(db))
 
         repository.insertSession(
             FocusSessionRecord(
