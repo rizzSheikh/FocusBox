@@ -1,4 +1,4 @@
-package com.rizz.focusbox.feature.stats
+package com.rizz.focusbox.feature.stats.model
 
 import com.rizz.focusbox.db.FocusSession
 import kotlinx.datetime.LocalDate

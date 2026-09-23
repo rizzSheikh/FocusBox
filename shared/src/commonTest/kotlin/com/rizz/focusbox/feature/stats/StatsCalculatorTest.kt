@@ -1,6 +1,7 @@
 package com.rizz.focusbox.feature.stats
 
 import com.rizz.focusbox.db.FocusSession
+import com.rizz.focusbox.feature.stats.model.HistoryFilter
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone

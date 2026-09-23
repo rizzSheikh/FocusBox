@@ -24,6 +24,24 @@ class SqlDelightSettingsRepository(
             .mapToOneOrNull(Dispatchers.Default)
             .map { row -> row?.toSettings() ?: TimerDurationsSettings.DEFAULT }
 
+    override fun updateTimerDurations(
+        focusMin: Int,
+        shortBreakMin: Int,
+        longBreakMin: Int,
+        longBreakInterval: Int,
+    ) {
+        settingsDao.updateTimerDurations(
+            focusMin = focusMin.toLong(),
+            shortBreakMin = shortBreakMin.toLong(),
+            longBreakMin = longBreakMin.toLong(),
+            longBreakInterval = longBreakInterval.toLong(),
+        )
+    }
+
+    override fun updateNotificationsEnabled(enabled: Boolean) {
+        settingsDao.updateNotificationsEnabled(if (enabled) 1L else 0L)
+    }
+
     private fun Settings.toSettings(): TimerDurationsSettings =
         TimerDurationsSettings(
             focusMin = focusMin.toInt(),

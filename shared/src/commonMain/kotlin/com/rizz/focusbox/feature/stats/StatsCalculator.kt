@@ -1,6 +1,11 @@
 package com.rizz.focusbox.feature.stats
 
 import com.rizz.focusbox.db.FocusSession
+import com.rizz.focusbox.feature.stats.model.DashboardStats
+import com.rizz.focusbox.feature.stats.model.DayTotal
+import com.rizz.focusbox.feature.stats.model.HistoryFilter
+import com.rizz.focusbox.feature.stats.model.HistoryGroup
+import com.rizz.focusbox.feature.stats.model.TaskTotal
 import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
@@ -47,7 +52,11 @@ object StatsCalculator {
         val focusByTask = completedFocus
             .filter { it.taskName != null && it.localDate(zone) >= windowStart && it.localDate(zone) <= today }
             .groupBy { it.taskName!! }
-            .map { (taskName, entries) -> TaskTotal(taskName, entries.sumOf { it.actualDurationSec }) }
+            .map { (taskName, entries) ->
+                TaskTotal(
+                    taskName,
+                    entries.sumOf { it.actualDurationSec })
+            }
             .sortedByDescending { it.totalFocusSec }
 
         val recentSessions = sessions.sortedByDescending { it.startedAt }.take(5)

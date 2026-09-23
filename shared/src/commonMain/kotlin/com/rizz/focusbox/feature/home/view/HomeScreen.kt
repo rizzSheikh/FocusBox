@@ -1,4 +1,4 @@
-package com.rizz.focusbox.feature.home.view.components
+package com.rizz.focusbox.feature.home.view
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +15,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import com.rizz.focusbox.feature.settings.view.SettingsScreenMain
+import com.rizz.focusbox.feature.stats.view.StatsScreenMain
+import com.rizz.focusbox.feature.timer.view.TimerScreenMain
 import com.rizz.focusbox.ui.components.FocusBoxDestination
 import com.rizz.focusbox.ui.components.FocusBoxNavigationBar
 import com.rizz.focusbox.ui.components.FocusBoxTopAppBar
@@ -30,7 +33,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         modifier = modifier.testTag(UiTestTags.HOME_SCREEN),
         topBar = {
             FocusBoxTopAppBar(
-                title = "focusBox",
+                title = selectedDestination.label,
                 actions = {
                     IconButton(onClick = {}) {
                         Icon(imageVector = Icons.Filled.MoreVert, contentDescription = null)
@@ -46,7 +49,11 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         },
     ) { innerPadding ->
         Box(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
-
+            when (selectedDestination) {
+                FocusBoxDestination.Timer -> TimerScreenMain()
+                FocusBoxDestination.Stats -> StatsScreenMain()
+                FocusBoxDestination.Settings -> SettingsScreenMain()
+            }
         }
     }
 }
